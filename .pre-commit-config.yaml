@@ -1,0 +1,53 @@
+# Configuración de pre-commit para API de Música
+# Autor: Jhon Salcedo (@jasl89)
+
+repos:
+  # Ruff - Linter y formateador Python ultra-rápido
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.9
+    hooks:
+      # Ejecutar el linter de ruff
+      - id: ruff
+        name: Ruff Linter
+        args: [--fix, --exit-non-zero-on-fix]
+        description: Analiza el código Python y corrige problemas automáticamente
+
+      # Ejecutar el formateador de ruff
+      - id: ruff-format
+        name: Ruff Formatter
+        description: Formatea el código Python según estándares
+
+  # Pre-commit hooks adicionales útiles
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # Eliminar espacios en blanco al final de líneas
+      - id: trailing-whitespace
+        name: Eliminar espacios finales
+
+      # Asegurar que los archivos terminen con una línea vacía
+      - id: end-of-file-fixer
+        name: Corregir fin de archivo
+
+      # Verificar formato YAML
+      - id: check-yaml
+        name: Verificar YAML
+
+      # Verificar formato JSON
+      - id: check-json
+        name: Verificar JSON
+
+      # Prevenir commits a la rama main directamente (desactivado para desarrollo)
+      # - id: no-commit-to-branch
+      #   name: Proteger rama main
+      #   args: [--branch, main]
+      #   stages: [commit]
+
+      # Verificar que no haya archivos grandes
+      - id: check-added-large-files
+        name: Verificar archivos grandes
+        args: [--maxkb=1000]
+
+      # Verificar archivos de merge conflict
+      - id: check-merge-conflict
+        name: Verificar conflictos de merge
